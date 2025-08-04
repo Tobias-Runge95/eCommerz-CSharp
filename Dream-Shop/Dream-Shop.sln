@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dream-Shop.API", "Dream-Shop.API\Dream-Shop.API.csproj", "{4034B15C-829E-4782-84AA-95EADA1999BF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dream-Shop.Database", "Dream-Shop.Database\Dream-Shop.Database.csproj", "{B7796AF7-DB39-44C5-B5BE-5CB01056D07C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dream-Shop.Core", "Dream-Shop.Core\Dream-Shop.Core.csproj", "{803F8FAB-6197-4A7F-B7F1-F2C1FBC4520A}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{4034B15C-829E-4782-84AA-95EADA1999BF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4034B15C-829E-4782-84AA-95EADA1999BF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4034B15C-829E-4782-84AA-95EADA1999BF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4034B15C-829E-4782-84AA-95EADA1999BF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B7796AF7-DB39-44C5-B5BE-5CB01056D07C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B7796AF7-DB39-44C5-B5BE-5CB01056D07C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B7796AF7-DB39-44C5-B5BE-5CB01056D07C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B7796AF7-DB39-44C5-B5BE-5CB01056D07C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{803F8FAB-6197-4A7F-B7F1-F2C1FBC4520A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{803F8FAB-6197-4A7F-B7F1-F2C1FBC4520A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{803F8FAB-6197-4A7F-B7F1-F2C1FBC4520A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{803F8FAB-6197-4A7F-B7F1-F2C1FBC4520A}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
