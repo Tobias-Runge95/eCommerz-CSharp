@@ -14,6 +14,10 @@ public interface IProductRepository : IBaseRepository<Product>
     Task<List<Product>> findByName(string name);
 
     Task<List<Product>> findByBrandAndName(string brand, string name);
+    
+    Task<List<Product>> GetAllProducts();
+    
+    Task<Product?> findById(Guid id);
 
     int countByBrandAndName(string brand, string name);
 
@@ -65,6 +69,16 @@ public class ProductRepository : BaseRepository<Product>, IProductRepository
             .Include(x => x.Category)
             .Include(x => x.Images)
             .ToListAsync();
+    }
+
+    public async Task<List<Product>> GetAllProducts()
+    {
+        return await _db.Products.ToListAsync();
+    }
+
+    public async Task<Product?> findById(Guid id)
+    {
+        return await _db.Products.FirstOrDefaultAsync(x => x.id == id);
     }
 
     public int countByBrandAndName(string brand, string name)
