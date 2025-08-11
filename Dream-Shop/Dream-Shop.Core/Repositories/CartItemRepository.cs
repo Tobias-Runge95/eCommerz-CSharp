@@ -1,4 +1,5 @@
-﻿using Dream_Shop.Database.Models;
+﻿using Dream_Shop.Database;
+using Dream_Shop.Database.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace Dream_Shop.Core.Repositories;
@@ -8,7 +9,7 @@ public interface ICartItemRepository : IBaseRepository<CartItem>
     Task DeleteAllByCartId(Guid cartId);
 }
 
-public class CartItemRepository :  BaseRepository<CartItem>, ICartItemRepository
+public class CartItemRepository(AppDbContext db) : BaseRepository<CartItem>(db), ICartItemRepository
 {
     public async Task DeleteAllByCartId(Guid cartId)
     {

@@ -1,4 +1,5 @@
-﻿using Dream_Shop.Database.Models;
+﻿using Dream_Shop.Database;
+using Dream_Shop.Database.Models;
 
 namespace Dream_Shop.Core.Repositories;
 
@@ -7,7 +8,7 @@ public interface IOrderItemRepository : IBaseRepository<OrderItem>
     
 }
 
-public class OrderItemRepository :  BaseRepository<OrderItem>, IOrderItemRepository
+public class OrderItemRepository(AppDbContext db) :  BaseRepository<OrderItem>(db), IOrderItemRepository
 {
     
 }

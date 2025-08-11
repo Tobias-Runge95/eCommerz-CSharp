@@ -1,4 +1,5 @@
-﻿using Dream_Shop.Database.Models;
+﻿using Dream_Shop.Database;
+using Dream_Shop.Database.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace Dream_Shop.Core.Repositories;
@@ -8,7 +9,7 @@ public interface ICartRepository : IBaseRepository<Cart>
     Task<Cart?> GetCartByUserId(Guid userId);
 }
 
-public class CartRepository : BaseRepository<Cart>, ICartRepository
+public class CartRepository(AppDbContext db) : BaseRepository<Cart>(db), ICartRepository
 {
     public async Task<Cart?> GetCartByUserId(Guid userId)
     {

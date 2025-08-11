@@ -1,4 +1,5 @@
-﻿using Dream_Shop.Database.Models;
+﻿using Dream_Shop.Database;
+using Dream_Shop.Database.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace Dream_Shop.Core.Repositories;
@@ -13,7 +14,7 @@ public interface ICategoriesRepository : IBaseRepository<Category>
     Task<List<Category>> GetAllCategories();
 }
 
-public class CategoryRepository : BaseRepository<Category>, ICategoriesRepository
+public class CategoryRepository(AppDbContext db) : BaseRepository<Category>(db), ICategoriesRepository
 {
     public async Task<Category?> FindByName(string name)
     {

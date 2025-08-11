@@ -16,7 +16,12 @@ public interface IBaseRepository<TEntity>
 public class BaseRepository<TEntity> : IBaseRepository<TEntity> where TEntity: class
 {
     internal readonly AppDbContext _db;
-    
+
+    public BaseRepository(AppDbContext db)
+    {
+        _db = db;
+    }
+
     public void Add(TEntity entity)
     {
         _db.AddAsync(entity);

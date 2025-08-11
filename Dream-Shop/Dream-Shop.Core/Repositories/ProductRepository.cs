@@ -1,4 +1,5 @@
-﻿using Dream_Shop.Database.Models;
+﻿using Dream_Shop.Database;
+using Dream_Shop.Database.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace Dream_Shop.Core.Repositories;
@@ -24,7 +25,7 @@ public interface IProductRepository : IBaseRepository<Product>
     Task<bool> existsByNameAndBrand(string name, string brand);
 }
 
-public class ProductRepository : BaseRepository<Product>, IProductRepository
+public class ProductRepository(AppDbContext db) : BaseRepository<Product>(db), IProductRepository
 {
     public async Task<List<Product>> findByCategoryName(string categoryName)
     {

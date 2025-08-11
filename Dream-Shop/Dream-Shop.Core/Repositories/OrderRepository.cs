@@ -1,4 +1,5 @@
-﻿using Dream_Shop.Database.Models;
+﻿using Dream_Shop.Database;
+using Dream_Shop.Database.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace Dream_Shop.Core.Repositories;
@@ -8,7 +9,7 @@ public interface IOrderRepository : IBaseRepository<Order>
     Task<List<Order>> FindByUserId(Guid userId);
 }
 
-public class OrderRepository : BaseRepository<Order>, IOrderRepository
+public class OrderRepository(AppDbContext db) : BaseRepository<Order>(db), IOrderRepository
 {
     public async Task<List<Order>> FindByUserId(Guid userId)
     {
