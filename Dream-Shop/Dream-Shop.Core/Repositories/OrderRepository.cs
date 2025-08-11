@@ -7,6 +7,7 @@ namespace Dream_Shop.Core.Repositories;
 public interface IOrderRepository : IBaseRepository<Order>
 {
     Task<List<Order>> FindByUserId(Guid userId);
+    Task<Order?> FindById(Guid id);
 }
 
 public class OrderRepository(AppDbContext db) : BaseRepository<Order>(db), IOrderRepository
@@ -18,5 +19,10 @@ public class OrderRepository(AppDbContext db) : BaseRepository<Order>(db), IOrde
             .Include(x => x.OrderItems)
             .ThenInclude(x => x.Product)
             .ToListAsync();
+    }
+
+    public async Task<Order?> FindById(Guid id)
+    {
+        return await _db.Orders.FindAsync(id);
     }
 }
