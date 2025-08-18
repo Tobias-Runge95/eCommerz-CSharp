@@ -1,6 +1,7 @@
 using Azure.Identity;
 using Azure.Security.KeyVault.Keys;
 using Dream_Shop.API.Extensions;
+using Dream_Shop.Core;
 using Dream_Shop.Database;
 using Dream_Shop.Database.Models;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -71,7 +72,7 @@ builder.Services.AddIdentityCore<User>()
     .AddUserStore<UserStore<User, IdentityRole<Guid>, AppDbContext, Guid>>();
 builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseNpgsql(builder.Configuration.GetConnectionString("Database")));
-// builder.Services.Register();
+builder.Services.RegisterServices();
 builder.Services.AddControllers();
 var app = builder.Build();
 

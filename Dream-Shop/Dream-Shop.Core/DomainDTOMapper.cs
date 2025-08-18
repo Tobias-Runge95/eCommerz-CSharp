@@ -1,4 +1,6 @@
 ﻿using Dream_Shop.Core.Response.Image;
+using Dream_Shop.Core.Response.Order;
+using Dream_Shop.Core.Response.OrderItem;
 using Dream_Shop.Core.Response.Product;
 using Dream_Shop.Database.Models;
 
@@ -28,6 +30,27 @@ public static class DomainDTOMapper
             DownloadUrl = image.DownloadUrl,
             FileName = image.FileName,
             Id = image.Id,
+        };
+    }
+
+    public static OrderDTO ToOrderDTO(this Order order)
+    {
+        return new OrderDTO()
+        {
+            Id = order.Id,
+            OrderDate = order.OrderDate,
+            TotalAmount = order.TotalAmount,
+            OrderItems = order.OrderItems.Select(ToOrderItemDTO).ToList(),
+        };
+    }
+
+    public static OrderItemDTO ToOrderItemDTO(this OrderItem orderItem)
+    {
+        return new OrderItemDTO()
+        {
+            Id = orderItem.Id,
+            Quantity = orderItem.Quantity,
+            Price = orderItem.Price,
         };
     }
 }

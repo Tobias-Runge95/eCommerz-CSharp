@@ -2,6 +2,11 @@
 
 public class OrderItem
 {
+    public OrderItem()
+    {
+        
+    }
+    
     public OrderItem(Product product, Order order, int quantity, decimal unitPrice)
     {
         Product = product;
