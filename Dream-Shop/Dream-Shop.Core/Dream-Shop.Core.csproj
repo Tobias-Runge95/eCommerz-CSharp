@@ -21,4 +21,8 @@
       <ProjectReference Include="..\Dream-Shop.Database\Dream-Shop.Database.csproj" />
     </ItemGroup>
 
+    <ItemGroup>
+      <Folder Include="Requests\Order\" />
+    </ItemGroup>
+
 </Project>

@@ -30,7 +30,7 @@ public class AuthManager : IAuthManager
 
     public async Task<LoginResponse> Login(LoginRequest loginRequest)
     {
-        var user =  await _userManager.FindByEmailAsync(loginRequest.Email);
+        var user = await _userManager.GetUserByEmailAsync(loginRequest.Email, CancellationToken.None);
         if (user is null)
         {
             throw new Exception("User not found");

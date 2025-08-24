@@ -15,14 +15,14 @@ public class AuthenticationController : ControllerBase
         _authManager = authManager;
     }
 
-    [HttpPost("/login")]
+    [HttpPost("login")]
     public async Task<IActionResult> Login([FromBody] LoginRequest request)
     {
         var result = await _authManager.Login(request);
         return Ok(result);
     }
 
-    [HttpDelete("/logout")]
+    [HttpDelete("logout")]
     public async Task<IActionResult> Logout([FromQuery] Guid userId)
     {
         await _authManager.Logout(userId);

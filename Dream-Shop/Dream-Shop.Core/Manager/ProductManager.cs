@@ -17,6 +17,7 @@ public interface IProductManager
     Task<List<ProductDTO>> GetProductsByCategory(string category);
     Task<List<ProductDTO>> GetProductsByBrand(string brand);
     Task<List<ProductDTO>> GetProductsByBrandAndName(string brand, string name);
+    Task<List<ProductDTO>> GetProductsByCategoryAndBrand(string category, string brand);
     long CountProductsByBrandAndName(string brand, string name);
 }
 
@@ -40,10 +41,10 @@ public class ProductManager : IProductManager
             throw new Exception();
         }
 
-        var category = await _categoriesRepository.FindByName(request.Category.Name);
+        var category = await _categoriesRepository.FindByName(request.Category);
         if (category is null)
         {
-            category = new Category(request.Category.Name);
+            category = new Category(request.Category);
             _categoriesRepository.Add(category);
         }
 
@@ -106,8 +107,8 @@ public class ProductManager : IProductManager
         {
             throw new ResourceNotFoundException("Products not found");
         }
-        
-        return products.Select(x => x.ToProductDTO()).ToList();
+        var productDTOs = products.Select(x => x.ToProductDTO()).ToList();
+        return productDTOs;
     }
 
     public async Task<ProductDTO> GetProductById(Guid id)
@@ -162,6 +163,12 @@ public class ProductManager : IProductManager
             throw new ResourceNotFoundException("Products not found");
         }
         
+        return products.Select(x => x.ToProductDTO()).ToList();
+    }
+
+    public async Task<List<ProductDTO>> GetProductsByCategoryAndBrand(string category, string brand)
+    {
+        var products = await _productRepository.findByCategoryNameAndBrand(category, brand);
         return products.Select(x => x.ToProductDTO()).ToList();
     }
 

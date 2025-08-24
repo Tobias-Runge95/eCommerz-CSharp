@@ -38,7 +38,7 @@ public static class Startup
             .AddScoped<IOrderItemManager, OrderItemManager>()
             .AddScoped<IProductManager, ProductManager>()
             .AddScoped<ICartItemManager, CartItemManager>()
-            .AddScoped<IRoleManager, RoleManager>()
+            .AddScoped<RoleManager>()
             .AddScoped<ICategoryManager, CategoryManager>()
             .AddScoped<IImageManager, ImageManager>();
     }

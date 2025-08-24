@@ -40,7 +40,7 @@ public class TokenService
         {
             Subject = new ClaimsIdentity(claims),
             Expires = DateTime.UtcNow.AddMinutes(30),
-            Issuer = "RPH",
+            Issuer = "DS",
             SigningCredentials = signingCredentials
         };
 

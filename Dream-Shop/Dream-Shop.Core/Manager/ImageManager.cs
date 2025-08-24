@@ -57,7 +57,8 @@ public class ImageManager : IImageManager
                 Name = request.FileName,
                 FileName = request.FileName,
                 FileType = request.FileType,
-                DownloadUrl = $"/api/images/image/download/{imageId}"
+                DownloadUrl = $"/api/images/image/download/{imageId}",
+                ProductId = productId
             };
             imagesToSave.Add(image);
         }

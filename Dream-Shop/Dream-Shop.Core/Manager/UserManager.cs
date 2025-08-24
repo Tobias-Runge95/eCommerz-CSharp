@@ -11,14 +11,14 @@ namespace Dream_Shop.Core.Manager;
 public class UserManager : UserManager<User>
 {
     private readonly IUserRepository _userRepository;
-    private readonly IRoleManager _roleManager;
+    private readonly RoleManager _roleManager;
     private readonly AppDbContext _context;
 
     public UserManager(IUserStore<User> store, IOptions<IdentityOptions> optionsAccessor,
         IPasswordHasher<User> passwordHasher, IEnumerable<IUserValidator<User>> userValidators,
         IEnumerable<IPasswordValidator<User>> passwordValidators, ILookupNormalizer keyNormalizer,
         IdentityErrorDescriber errors, IServiceProvider services, ILogger<UserManager<User>> logger,
-        IUserRepository userRepository, IRoleManager roleManager, AppDbContext context) : base(store, optionsAccessor,
+        IUserRepository userRepository, RoleManager roleManager, AppDbContext context) : base(store, optionsAccessor,
         passwordHasher, userValidators, passwordValidators, keyNormalizer, errors, services, logger)
     {
         _userRepository = userRepository;
@@ -61,5 +61,10 @@ public class UserManager : UserManager<User>
         user.NormalizedUserName = $"{request.FirstName} {request.LastName}".ToUpper();
 
         await _userRepository.SaveChangesAsync();
+    }
+
+    public async Task<User> GetUserByEmailAsync(string email, CancellationToken cancellationToken)
+    {
+        return await _userRepository.GetUserByEmailAsync(email, cancellationToken);
     }
 }

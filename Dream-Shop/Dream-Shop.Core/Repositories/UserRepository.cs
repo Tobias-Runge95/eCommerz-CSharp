@@ -8,7 +8,7 @@ public interface IUserRepository : IBaseRepository<User>
 {
     Task<User> GetUserAsync(Guid userId);
     Task<User> GetUserAsync(string userName);
-    Task<User> GetUserByEmailAsync(string email);
+    Task<User> GetUserByEmailAsync(string email, CancellationToken cancellationToken);
 }
 
 public class UserRepository : BaseRepository<User>, IUserRepository
@@ -31,8 +31,8 @@ public class UserRepository : BaseRepository<User>, IUserRepository
         return _db.Users.FirstOrDefaultAsync(u => u.UserName == userName)!;
     }
 
-    public Task<User> GetUserByEmailAsync(string email)
+    public Task<User> GetUserByEmailAsync(string email, CancellationToken cancellationToken)
     {
-        return _db.Users.FirstOrDefaultAsync(u => u.Email == email)!;
+        return _db.Users.FirstOrDefaultAsync(u => u.Email == email, cancellationToken)!;
     }
 }

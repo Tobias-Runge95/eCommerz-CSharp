@@ -1,5 +1,6 @@
 using Azure.Identity;
 using Azure.Security.KeyVault.Keys;
+using Dream_Shop.API;
 using Dream_Shop.API.Extensions;
 using Dream_Shop.Core;
 using Dream_Shop.Database;
@@ -28,7 +29,11 @@ builder.Services.AddAzureClients(azureBuilder =>
     ));
 });
 await CryptographyClientExtension.RegisterCryptographyClient(builder);
-builder.Services.AddAuthorization();
+builder.Services.AddAuthorization(option =>
+{
+    option.AddPolicy("admin", policy => policy.RequireRole("admin"));
+    option.AddPolicy("user", policy => policy.RequireRole("user"));
+});
 builder.Services.AddAuthentication(options =>
     {
         options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
@@ -47,7 +52,7 @@ builder.Services.AddAuthentication(options =>
             ValidateLifetime = true,
             ValidateIssuerSigningKey = true,
             IssuerSigningKey = rsaKey,
-            ValidIssuer = "RPH"
+            ValidIssuer = "DS"
         };
         options.Events = new JwtBearerEvents
         {
@@ -73,6 +78,7 @@ builder.Services.AddIdentityCore<User>()
 builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseNpgsql(builder.Configuration.GetConnectionString("Database")));
 builder.Services.RegisterServices();
+builder.Services.AddScoped<DataPusher>();
 builder.Services.AddControllers();
 var app = builder.Build();
 
@@ -86,4 +92,9 @@ app.UseHttpsRedirection();
 app.UseAuthentication();
 app.UseAuthorization();
 app.MapControllers();
+using (var scope = app.Services.CreateScope())
+{
+    var seeder = scope.ServiceProvider.GetRequiredService<DataPusher>();
+    await seeder.PushRoles();
+}
 app.Run();

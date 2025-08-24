@@ -74,7 +74,10 @@ public class ProductRepository(AppDbContext db) : BaseRepository<Product>(db), I
 
     public async Task<List<Product>> GetAllProducts()
     {
-        return await _db.Products.ToListAsync();
+        return await _db.Products
+            .Include(x => x.Category)
+            .Include(x => x.Images)
+            .ToListAsync();
     }
 
     public async Task<Product?> findById(Guid id)
